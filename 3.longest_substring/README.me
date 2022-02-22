@@ -1,0 +1,68 @@
+The ideas to solve this problem is not easy to come up with.
+
+
+Here is how I solve this problem without searching answer from forum.
+
+  1. Create a map, keys of this map is character(like "a", "b" or "c" and so on), while values are vectors that store the positions of this character.
+     for example, if we have a string "abcjghabc", then the content of map will be like :
+     
+     "a" : [ 0 , 6 ]
+     "b" : [ 1 , 7 ]
+     "c" : [ 2 , 8 ]
+     "j" : [ 3 ]
+     "g" : [ 4 ]
+     "h" : [ 5 ]
+
+  2. We start from left side of string, so the longest substring will try to grow to right side of given input string.
+     To find the longest substring that does not have two same characters in it from given string , we keep and index that point to 
+     the head of substring that we have now, and also keep an index that point to the tail of substring. The index that point to the
+     end of substring will move one character one time and check if the current substring still mee the requirement of problem.
+     Every time we search a new character, check if this character is in map. If it is, push the position of this character to the
+     vector of this character. If it is not, then create a hash for this character.
+     
+  3. To check whether current substring still meet the requirement of problem, we use the current character that pointed by the index which point
+     to the end of substring as a key to search for the value in map. The "value" of map is a vector, we just need the "length" of picked vector 
+     instead of the content of vector(i.e. the positions of characters). The reason is that if now we have a character that appear in current 
+     substring twice, then current substring does not meet the requirement. That is, the vectors that record the positions of specific character 
+     should not exceed 2 if current subetring is legal.
+     for example :
+     
+     map A
+     "a" : [ 0 ]
+     "c" : [ 1 ]
+     "b" " [ 2 ]
+     "h" " [ 3 ]
+     
+     map A records the positions of characters that ever appear in a legal substring.
+     
+     map B
+     
+     "a" : [ 0 , 6 ]
+     "b" : [ 1 , 7 ]
+     "c" : [ 2 , 8 ]
+     "j" : [ 3 ]
+     "g" : [ 4 ]
+     "h" : [ 5 ]
+     
+     map B records the positions of characters that ever appear in a illegal substring.
+     (Because "a", "b" and "c" appear twice in current substring respectively)
+     
+   
+  4. If two same character appeared in current substring, we have to record the length of current substring and try to 
+     find another substring that may have length longer than current substring.
+     To make this happen, the index point to the head and end of substring have to be move to new positions. The head index
+     has to be moved to the position where the first time the two same character appear because current substring 
+     will not have two same characters after this movement.
+     for example : 
+     
+     Given string "acbkcbcabcb"
+     If above procedure is used, the first longest string is "acbk", now head index is 0 and end index is 3.
+     In next iteration, "c" in index 4 will be searched and now the current substring is not legal.
+     To find next legal substring, head index is moved to index 2 so we have substring "bkc" now.
+     
+     For end index of substring, it don't need to be moved because current substring is legal now, we can keep on searching
+     characters.
+     
+  5. After all the characters in given string is searched, notice that we still have to calculate the length of current substring once
+     because the calculation of length of longest substring only exist in while loop, so another calculation has to be put outside the while loop.
+     
