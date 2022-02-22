@@ -1,0 +1,30 @@
+Problem description
+  Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+  You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+  You can return the answer in any order.
+
+
+The solution I use is a better solution with hashmap
+
+Here I stil introduce brute force solution:
+  
+  1. Iterate every element in array, for current element,try to find an element after this element that the sum of the two elements is the target number,
+     
+  2. If no element matched, change the current element to next one
+  
+  performance : In the worst case, the first round need to search (n-1) elements, the second round need to search (n-2) elements, and keep so on.
+                Total searched elements will be (n-1)! elements, so it's O(n^2) in time complexity.
+
+In better solution we use hash map to keep track of the position of every numbers.
+
+  1. Create and initialize hashmap. The keys of hashmap in each entry are values of given array, and the values of hashmap in each entry are index of given array 
+  
+  2. Search elements in sequential order. If the difference of target number and current element(i.e. target-nums[i]) ever appear in hashmap, which means we find a pair of nmubers
+     in two different position that the sum of the two numbers are target numbers. Because we have store the position by number value in hashmap,
+     random access to specific element is fast and unambiguous(i.e. even though one number appear at least 1 time in array, we can still find arbitrary one of them to form a pair).
+     (number1 + number2 = target number <=> target number - number1 = number2 <=> target number - number2 = number1)
+     If the difference of target number and current element does not appear in array, there does not exist a pair of numbers that meet the requirement of question,
+     so we move on to next element and keep searching until all the element in array are discovered.
+ 
