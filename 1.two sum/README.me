@@ -16,6 +16,8 @@ Here I stil introduce brute force solution:
   
   performance : In the worst case, the first round need to search (n-1) elements, the second round need to search (n-2) elements, and keep so on.
                 Total searched elements will be (n-1)! elements, so it's O(n^2) in time complexity.
+  
+  test performance on LeetCode : 800ms , 10.3 MB
 
 In better solution we use hash map to keep track of the position of every numbers.
 
@@ -28,3 +30,6 @@ In better solution we use hash map to keep track of the position of every number
      If the difference of target number and current element does not appear in array, there does not exist a pair of numbers that meet the requirement of question,
      so we move on to next element and keep searching until all the element in array are discovered.
  
+ performance : We use linear search to scan all the element in array and 
+ 
+ test performance on LeetCode : 20ms , 11.2MB
