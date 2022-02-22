@@ -1,0 +1,21 @@
+This problem is an easy application of linked list, basic knowledge to pointer and structure will help to find the solution.
+
+Ideas : 
+
+  1. Initialize a ListNode instance, and create a ListNode pointer to point the instance.
+     If ListNode instance is not created, judge will give error even though everything is correct because of the access is out of scope.
+     After that, create another ListNode pointer and point to current ListNode pointer in order to get the head of linked list.
+     
+  2. We start to add numbers of two linked lists, get the head of two input linked lists, there are 2 conditions that may happend
+     
+     (1) the length of two linked list are the same : this is the simplest case, we just need to iterate all the element of two list
+         and add bit-by-bit.
+     (2) the length of one linked list is shorter than the other : after a certain number of iteration, one list will point to null.
+         In this case the other list that has longer length will sum with 0
+     
+     We can add two numbers in same position from the two linked lists and finish the sum of two linked lists.
+  
+  3. For the pointer that points to the instance of ListNode, create a ListNode instance using function "new" and assign the sum of two
+     numbers in the same position from step 2. 
+     
+  
