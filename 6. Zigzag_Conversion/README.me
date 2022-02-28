@@ -1,0 +1,17 @@
+This problem may be solved with simple iteration.
+
+1. Ideas
+  
+  (1). For a given string, if required numRows is 1, just return the given string.
+  
+  (2). If numRows is not 1, run a for loop that iterate from 0 to (numRows-1). In each loop, concate the i-th character of given string and
+       try to find the 2*(numRows-1) - (2*i))-th and (2*(numRows-1))-th characters after the current character, this can be observed with 
+       some simple calculation. After searching the two characters, move index to the (2*(numRows-1))-th character after current character.
+  
+  (3). So far this problem is solved, but there is still something to note. If you try to find characters using (2*(numRows-1) - (2*i))(character
+       at the skew line) and add index to (index + (2*(numRows-1) - (2*i))). This method will result in WA because if you add (2*i) after moving index,
+       the (idx + 2*i)-th element may locate on the same vertical line of current character instead of new one.
+       
+
+
+performance : 16ms(higher than 53.04%), 8.1MB(higher than 94.19%)

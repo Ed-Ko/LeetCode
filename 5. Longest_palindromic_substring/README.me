@@ -1,0 +1,45 @@
+Logic for this problem is easy and not hard to undaerstand
+
+1. Ideas
+   
+   In the given string, only two types of palindromic substring that will appear. 
+
+   (1). The length of palindromic substring is odd
+        In this case, only one character is the center of palindromic substring if it exists.
+        
+   (2). The length of palindromic substring is even
+        Two characters form the center of palindromic substring if this substring exist.
+   
+   now the method we use to find and iterate the center to decide palindromic substring is important.
+  
+2. Method
+   In this problem I have come up with 3 different methods
+   
+   (1). naive
+        Use two for loop to iterate all the character in given string, the iterated character is choosed as center
+        and we can try to find palindromic substrings.
+       
+        performance : This approach will TLE, though it seems to work if some bugs can be solved. I think this approach
+                      is not good enoughand hard to understand, so I rewrited my code.
+   
+   (2). 3 conditions
+        I refered to this approach from LeetCode forum. The idea of that programmer was same as mine, while his code is AC and mine is TLE after I tried both.
+        The key difference is the method to get the palindromic substring.
+        In C++, string concatenation takes much time then substring function.
+        
+        for example : 
+            
+            string concatenation : string sub_string = given_string[i-1] + sub_string + given_string[i+1];
+            substring function : string sub_string = given_string.substr(i-1,3);
+          
+            the lower method is faster.
+            
+        So if the part of string concatenation is changed to substring function, perhaps it will get AC.
+        
+   (3). 2 conditions
+        In this method, string concatemation is changed to substring function and the third case(looking for palindromic substring that is consist of 
+        only one type of character), this method got AC.
+        
+        performance : In worst case, the given string is consist of one type of character, for example : "aaaaaaaa...aaaaa" or "fffff...fffff". For the i-th loop,
+                      (i/2) characters have to be examined. the time complexity is O(n^2).
+        
