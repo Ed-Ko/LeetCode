@@ -1,0 +1,28 @@
+This problem is easy to solve due to some limit of the given input integer.
+
+1. Ideas
+   
+   In this problem, the given input integer is between -2^31 to (2^31)-1, i.e, -2,147,483,648 to 2,147,483,647. 
+   Here I came up with my own solution and refered to another faster & simple solution in forum.
+   
+   Solution 1
+      
+      (1). Read the given input integer first and change it into absolute value. Sign of integer is processed later.
+      
+      (2). The numbers of positive integers and negative integers are not equal, here I separate them into two part.
+           Because given input integer may exists one or more zeros at the end, these zeros should not be presented
+           in reverse order integer. While loop is used to eliminate zeros and divide the given input.
+           
+      (3). The second while loop is used to further generate the reverse integer and check whether current reverse 
+           integer exceed the limit of INT_MAX(2,147,483,647) int positive sign or INT_MIN(-2,147,483,648) in negative sign
+      
+      (4). The final step of this solution is to put sign before the processed output integer.
+   
+   Solution 2
+   
+      (1). For the given input integer, if it's positive or negative instead of 0, we can finally process the given input
+           to zero. Two if-statements are removed.
+      
+      (2). The if statement in the while loop uses simple conditions because of the limit of given input integer I mentioned
+           above. When the processed output integer exceed INT_MAX or INT_MIN, go out the while loop
+   
