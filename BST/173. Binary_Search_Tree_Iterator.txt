@@ -1,0 +1,101 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class BSTIterator {
+public:
+    
+    TreeNode* tree_root;
+    TreeNode* cur_node;
+    vector<TreeNode*> node_vec;
+    int cur_value;
+    
+    BSTIterator(TreeNode* root) {
+        
+        tree_root = root;
+        
+        cur_node = root;
+        node_vec.push_back(root);
+        
+        while(cur_node->left != nullptr){
+            cur_node = cur_node->left;
+            node_vec.push_back(cur_node);
+        }
+        
+        node_vec.push_back(cur_node);
+        cur_node = node_vec.back();
+ 
+        
+    }
+    
+    int next() {
+        cout << "node_vec : ";
+        for(int i = 0 ; i < node_vec.size() ; i++)
+            cout << node_vec[i]->val << " ";
+        cout << endl;
+        
+        cout << "cur val : " << cur_node->val << endl;
+        cout << " ========= " << endl;
+        
+        int tmp_val = cur_node->val;
+                
+        if(cur_node->right != nullptr){
+            
+            cur_node = cur_node->right;
+            node_vec.push_back(cur_node);
+            
+            while(cur_node->left != nullptr){
+                cur_node = cur_node->left;
+                node_vec.push_back(cur_node);
+            }
+            
+            return tmp_val;
+        }
+        else if(node_vec.size() != 0){
+            
+            int tmp_val = cur_node->val;
+            
+            while(node_vec.size() > 0){
+                
+                cur_node = node_vec.back();
+                node_vec.pop_back();
+                if(node_vec.size() <= 0)
+                    break;
+                if(node_vec.back()->val > tmp_val){
+                    cur_node = node_vec.back();
+                    break;
+                }
+                    
+            }
+            
+            return tmp_val;
+            
+            
+        }
+        return tmp_val;
+    }
+    
+    bool hasNext() {
+        
+        cout << "cur_node->val : " << cur_node->val << endl;
+        cout << " ========= " << endl;
+        if(node_vec.size() == 0)
+            return false;
+        else
+            return true;
+    }
+};
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator* obj = new BSTIterator(root);
+ * int param_1 = obj->next();
+ * bool param_2 = obj->hasNext();
+ */
