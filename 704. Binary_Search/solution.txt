@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        
+        int left = 0;
+        int right = nums.size() - 1;
+        int old_cur = INT_MIN;
+        int cur = (left + right) / 2;
+        
+        while(left <= right){
+            
+            if(nums[cur] == target)
+                return cur;
+            else if(nums[cur] > target){
+                right = cur;
+                old_cur = cur;
+                cur = (left + right) / 2;
+            }
+            else{
+                left = cur;
+                old_cur = cur;
+                cur = (left + right) / 2;
+            }
+            
+            if(cur == old_cur){
+                if(nums[right] == target)
+                    return right;
+                if(nums[left] == target)
+                    return left;
+                else
+                    break;
+            }
+            
+        }
+        
+        return -1;
+    }
+};
